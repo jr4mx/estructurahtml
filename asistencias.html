@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tomar Asistencia de Mis Grupos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-header {
+            background-color: #5f5ea3;
+            color: white;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background-color: #a3bf42;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #8aa638;
+        }
+        .card-title {
+            color: #5f5ea3;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <header><b-header site-title="Asistencias" container-size="container" title-show="true">
+        <nav class="navbar navbar-expand-lg bg-theme p-0" style=" 
+                background-image: linear-gradient(80deg, #ffffff, #e8e9e4); 
+                ">
+          <div class="container">
+            <a class="navbar-brand navbar-brand-horizontal d-flex align-items-center position-relative py-3" href="./">
+              <img class="d-none d-md-block dark-mode-item navbar-brand-item" src="https://www.ucol.mx/cms/apps/assets/img/logos/UdeC-LH-nombre-dependencia.svg    " alt="Asistencias" height="40">
+              <img class="d-block d-md-none dark-mode-item navbar-brand-item" src="https://www.ucol.mx/cms/apps/assets/img/logos/ucol_white.png    " alt="Asistencias" height="40">
+              <br>
+
+            </a>
+
+            
+                                      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Mostrar menu" style="position:absolute;top:15px;right:10px">
+                                        <span class="navbar-toggler-icon"></span>
+                                      </button>
+                                      <div class="collapse navbar-collapse" id="navbar-menu">
+                                        <ul class="navbar-nav ms-auto align-items-center mb-2 mb-lg-0"><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app" class="nav-link py-lg-4">Inicio</a></li><li class="nav-item dropdown"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/coordinador" class="nav-link py-lg-4 dropdown-toggle" id="navbarDropdown1" role="button" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-expanded="false" data-bs-auto-close="outside">Coordinador</a><ul class="dropdown-menu" aria-bs-labelledby="navbarDropdown1"><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/coordinador" class="nav-link py-lg-4">Justificar faltas</a></li><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/coordinador/canalizados" class="nav-link py-lg-4">Alumnos canalizados</a></li></ul></li><li class="nav-item dropdown"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/profesor" class="nav-link py-lg-4 dropdown-toggle" id="navbarDropdown2" role="button" data-bs-toggle="dropdown" aria-bs-haspopup="true" aria-expanded="false" data-bs-auto-close="outside">Profesor</a><ul class="dropdown-menu" aria-bs-labelledby="navbarDropdown2"><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/profesor" class="nav-link py-lg-4">Toma de asistencia</a></li><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/profesor/canalizar" class="nav-link py-lg-4">Canalizar</a></li><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/profesor/report" class="nav-link py-lg-4">Reportes</a></li></ul></li><li class="nav-item"><a href="https://pre-datacenter.ucol.mx/web-asistencias/app/nuevo" class="nav-link py-lg-4">Gestión</a></li><li class="nav-item"><a class="btn btn-secondary btn-sm" href="https://pre-datacenter.ucol.mx/web-asistencias/logout.php">Salir</a></li></ul>
+                               </div>
+          </div>
+        </nav>
+        
+      </b-header>
+      <!-- un div divisor con el color primario-->
+        <div class="btn-primary" style="height: 10px; width: 100%;"></div>
+    </header>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4" style="color: #5f5ea3;">Tomar Asistencia de Mis Grupos</h1>
+        <div id="grupos-container" class="row row-cols-1 row-cols-md-3 g-4 pt-5">
+            <!-- Las tarjetas de los grupos se generarán aquí -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Datos de ejemplo de grupos
+        const grupos = [
+            {
+                escuela: "Facultad de Telemática",
+                carrera: "Ingeniería en Software",
+                materia: "Desarrollo de Software Seguro",
+                gradoGrupo: "6I",
+                fechaToma: "21-02-2025",
+                tomas: ["Toma 1", "Toma 2", "Toma 3"],
+                estatus: 0
+            },
+            {
+                escuela: "Facultad de Telemática",
+                carrera: "Ingeniería en Software",
+                materia: "Programación para Web",
+                gradoGrupo: "5A",
+                fechaToma: "21-02-2025",
+                tomas: ["Toma 1", "Toma 2"],
+                estatus: 1
+
+            },
+            {
+                escuela: "Facultad de Telemática",
+                carrera: "Ingeniería en Software",
+                materia: "Bases de Datos",
+                gradoGrupo: "4H",
+                fechaToma: "21-02-2025",
+                tomas: ["Toma 1", "Toma 2", "Toma 3"],
+                estatus: 1
+            }
+        ];
+
+        function generarCards(grupos) {
+            const container = document.getElementById('grupos-container');
+            container.innerHTML = ''; // Limpiar contenedor
+
+            grupos.forEach(grupo => {
+                let card = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <div class="card-header">
+                                ${grupo.escuela}
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">${grupo.materia}</h5>
+                                <p class="card-text"><strong>Carrera:</strong> ${grupo.carrera}</p>
+                                <p class="card-text"><strong>Grado y Grupo:</strong> ${grupo.gradoGrupo}</p>
+                                <p class="card-text"><strong>Fecha de la Toma:</strong> ${grupo.fechaToma}</p>
+                                <label for="toma-select-${grupo.gradoGrupo}" class="form-label"><strong>Seleccionar Toma:</strong></label>
+                                <select class="form-select mb-3" id="toma-select-${grupo.gradoGrupo}">
+                                    ${grupo.tomas.map(toma => `<option value="${toma}">${toma}</option>`).join('')}
+                                </select><div class="d-grid mx-auto">
+                                `;
+                                if (grupo.estatus === 0) {
+                                 card+= ` <button class="btn btn-primary mx-auto w-100">Tomar Asistencia</button>`;
+                                } else {
+                                 card+= ` <button class="btn btn-secondary mx-auto w-100" disabled>Asistencia Tomada</button>`;
+                                }
+                            card+= `</div>
+                          </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += card;
+            });
+        }
+
+        // Mostrar los grupos
+        generarCards(grupos);
+    </script>
+</body>
+</html>
