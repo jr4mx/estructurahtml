@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+permissions:
+  actions: write
+  contents: read
+  security-events: write
+
 jobs:
   zap_scan:
     runs-on: ubuntu-latest
@@ -16,7 +21,7 @@ jobs:
     - name: Run OWASP ZAP Baseline Scan
       uses: zaproxy/action-baseline@v0.7.0
       with:
-        target: 'https://jr4mx.github.io/estructurahtml/'  # Cambia esto por la URL de tu aplicación
+        target: 'https://jr4mx.github.io/estructurahtml/'  # Cambia esto por la URL correcta de tu aplicación
         rules_file_name: '.zap/rules.tsv'
         fail_action: true
         cmd_options: '-config api.key=your-api-key'  # Opcional: Si necesitas una API key
