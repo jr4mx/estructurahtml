@@ -1,33 +1,28 @@
+name: OWASP ZAP Baseline Scan
+
 on:
   push:
     branches:
-      - main  # Se ejecuta solo cuando hay cambios en main
-  workflow_dispatch:  # Permite ejecución manual
-
-name: 🔍 OWASP ZAP Security Scan
-
-permissions:
-  contents: read
-  actions: write  # Permite subir reportes como artefactos
+      - main
 
 jobs:
   zap_scan:
-    name: 🔍 OWASP ZAP Security Scan
     runs-on: ubuntu-latest
 
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v3
 
-      - name: 🔍 Run OWASP ZAP Baseline Scan
-        uses: zaproxy/action-baseline@v0.10.0
-        with:
-          target: "https://jr4mx.github.io/estructurahtml/"
-          cmd_options: "-a --verbose"
+    - name: Run OWASP ZAP Baseline Scan
+      uses: zaproxy/action-baseline@v0.7.0
+      with:
+        target: 'https://jr4mx.github.io/estructurahtml/'  # Cambia esto por la URL de tu aplicación
+        rules_file_name: '.zap/rules.tsv'
+        fail_action: true
+        cmd_options: '-config api.key=your-api-key'  # Opcional: Si necesitas una API key
 
-
-      - name: 📤 Upload OWASP ZAP Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: ZAP-Report
-          path: report_html
+    - name: Upload ZAP Report
+      uses: actions/upload-artifact@v3
+      with:
+        name: zap-report
+        path: zap_report.html
