@@ -1,58 +1,32 @@
-#name: GitHub Actions Demo
-#run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-#on: [push]
-#jobs:
-#  Explore-GitHub-Actions:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-#      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-#      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-#      - name: Check out repository code
-#        uses: actions/checkout@v4
-#      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-#      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-#      - name: List files in the repository
-#        run: |
-#         ls ${{ github.workspace }}
-#      - run: echo "🍏 This job's status is ${{ job.status }}."
-
-name: Security Tests with OWASP ZAP
-
 on:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - main  # Se ejecuta solo cuando hay cambios en main
   workflow_dispatch:  # Permite ejecución manual
+
+name: 🔍 OWASP ZAP Security Scan
+
+permissions:
+  contents: read
+  actions: write  # Permite subir reportes como artefactos
 
 jobs:
   zap_scan:
-    name: OWASP ZAP Security Scan
+    name: 🔍 OWASP ZAP Security Scan
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Code
+      - name: 🚚 Get latest code
         uses: actions/checkout@v4
 
-      - name: Run OWASP ZAP Baseline Scan
+      - name: 🔍 Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.10.0
         with:
-          target: "https://jr4mx.github.io/estructurahtml/"  # Cambia esta URL por la de tu aplicación en pruebas
-          rules_file_name: ".zap/rules.tsv"  # Opcional: reglas personalizadas
+          target: "https://jr4mx.github.io/estructurahtml/"  # URL del sitio a analizar
           cmd_options: "-a"
 
-      - name: Run OWASP ZAP Full Scan (Opcional)
-        uses: zaproxy/action-full-scan@v0.10.0
-        with:
-          target: "https://jr4mx.github.io/estructurahtml/"
-          cmd_options: "-a"
-
-      - name: Upload OWASP ZAP Report
-        uses: actions/upload-artifact@v4   # Actualizado a la versión 4
+      - name: 📤 Upload OWASP ZAP Report
+        uses: actions/upload-artifact@v4
         with:
           name: ZAP-Report
           path: report_html
-
