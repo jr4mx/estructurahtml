@@ -22,8 +22,9 @@ jobs:
       - name: 🔍 Run OWASP ZAP Baseline Scan
         uses: zaproxy/action-baseline@v0.10.0
         with:
-          target: "https://jr4mx.github.io/estructurahtml/"  # URL del sitio a analizar
-          cmd_options: "-a"
+          target: "https://jr4mx.github.io/estructurahtml/"
+          cmd_options: "-a --verbose"
+
 
       - name: 📤 Upload OWASP ZAP Report
         uses: actions/upload-artifact@v4
