@@ -1,5 +1,5 @@
 on: push
-name: Push Event
+name: Push Event con nuevas credenciasles
 jobs:
   deploy:
     name: Deploy to cluster
@@ -17,4 +17,4 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/myapp:${{ github.sha }}
-        
+
