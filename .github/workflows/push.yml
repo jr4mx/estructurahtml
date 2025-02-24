@@ -1,19 +1,25 @@
-on: push
-name: OWASP ZAP Baseline Scan
+name: Intento de OWASP ZAP Baseline Scan
+
+on:
+  push:
+    branches:
+      - main
+
 jobs:
-    deploy:
-      name: Deploy
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@main
-        - name: Build and push to docker
-          uses: docker/build-push-action@v2
-          with:
-            username: ${{ secrets.DOCKER_USERNAME }}
-            password: ${{ secrets.DOCKER_PASSWORD }}
-            repository: jr4mx/estructurahtml
-            tag_with_ref: true
-            tag_with_sha: true
-            tags: latest
-        - name: Deploy to Heroku
-          
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3  # Usa la versión estable más reciente
+
+      - name: Build and push to Docker
+        uses: docker/build-push-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          repository: jr4mx/estructurahtml
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: latest
+
